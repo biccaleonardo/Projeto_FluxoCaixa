@@ -32,4 +32,17 @@ public class SetorDAO {
        return lista; 
     }
     
+    
+    
+    public static void inserir(Setor setor){
+        String sql = "INSERT INTO setor ( nome, codigo ) "
+                + " VALUES ( '" + setor.getNome() + "' , "
+                        + "   " + setor.getCodigo() +" ) ";
+        boolean retorno = Conexao.executar( sql );
+        if( !retorno ){
+            JOptionPane.showMessageDialog(null, "Erro ao inserir setor");
+        }
+    
+    
 }
+

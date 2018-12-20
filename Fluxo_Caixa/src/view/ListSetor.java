@@ -5,6 +5,7 @@
  */
 package view;
 
+import javax.swing.JDesktopPane;
 import javax.swing.JOptionPane;
 
 /**
@@ -12,6 +13,8 @@ import javax.swing.JOptionPane;
  * @author 181301765
  */
 public class ListSetor extends javax.swing.JInternalFrame {
+    
+    public JDesktopPane jdpTelaInicial;
 
     /**
      * Creates new form ListSetor
@@ -32,7 +35,7 @@ public class ListSetor extends javax.swing.JInternalFrame {
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        tableSetor = new javax.swing.JTable();
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
 
@@ -41,7 +44,7 @@ public class ListSetor extends javax.swing.JInternalFrame {
         jLabel1.setText("Lista de Setores");
         jLabel1.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        tableSetor.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null},
                 {null, null},
@@ -52,7 +55,7 @@ public class ListSetor extends javax.swing.JInternalFrame {
                 "Nome", "Gerência/Coordenação"
             }
         ));
-        jScrollPane1.setViewportView(jTable1);
+        jScrollPane1.setViewportView(tableSetor);
 
         jButton1.setFont(new java.awt.Font("Calibri", 0, 18)); // NOI18N
         jButton1.setText("Editar");
@@ -116,14 +119,13 @@ public class ListSetor extends javax.swing.JInternalFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
-        
+             
                int linha = tableSetor.getSelectedRow();
         if( linha < 0 ){
             JOptionPane.showMessageDialog(this, 
-                    "Você deve selecionar uma cidade!");
+                    "Você deve selecionar um setor!");
         }else{
-            int codigo = (int) tableCidades.getValueAt(linha, 0);
+            int codigo = (int) tableSetor.getValueAt(linha, 0);
             FrmSetor tela = new FrmSetor(codigo, this);
             jdpTelaInicial.add(tela);
             tela.setVisible(true);
@@ -137,6 +139,6 @@ public class ListSetor extends javax.swing.JInternalFrame {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
+    private javax.swing.JTable tableSetor;
     // End of variables declaration//GEN-END:variables
 }

@@ -15,6 +15,8 @@ import model.Setor;
 public class FrmSetor extends javax.swing.JInternalFrame {
     
     private Setor setor;
+    
+      private ListSetor telaListSetor;
 
     /**
      * Creates new form FrmSetor
