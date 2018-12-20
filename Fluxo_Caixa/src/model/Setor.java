@@ -7,7 +7,7 @@ public class Setor {
     
 private int codigo;
 private String nome;
-private Setor setor;
+private Funcionario lider;
 
     public Setor() {
     }
@@ -15,7 +15,7 @@ private Setor setor;
     public Setor(int codigo, String nome, Setor setor) {
         this.codigo = codigo;
         this.nome = nome;
-        this.setor = setor;
+        this.lider = lider;
     }
 
     public int getCodigo() {
@@ -34,13 +34,15 @@ private Setor setor;
         this.nome = nome;
     }
 
-    public Setor getSetor() {
-        return setor;
+    public Funcionario getLider() {
+        return lider;
     }
 
-    public void setSetor(Setor setor) {
-        this.setor = setor;
+    public void setLider(Funcionario lider) {
+        this.lider = lider;
     }
+
+    
 
     
 }
