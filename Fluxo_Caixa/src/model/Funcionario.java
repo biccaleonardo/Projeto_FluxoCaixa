@@ -41,6 +41,8 @@ public class Funcionario {
     public void setSetor(Setor setor) {
         this.setor = setor;
     }
+    
+    
         
     
 }

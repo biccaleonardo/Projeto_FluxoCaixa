@@ -5,10 +5,13 @@
  */
 package view;
 
+import dao.FuncionarioDAO;
 import java.util.Calendar;
 import java.util.List;
 import javax.swing.JDesktopPane;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
+import model.Funcionario;
 
 /**
  *
@@ -19,7 +22,7 @@ public class ListFuncionario extends javax.swing.JInternalFrame {
         private JDesktopPane jdpTelaInicial;
         public ListFuncionario(JDesktopPane jdpTelaInicial) {
         initComponents();
-        //carregarTabela();
+        carregarTabela();
         this.jdpTelaInicial = jdpTelaInicial;
     }
     /**
@@ -27,7 +30,7 @@ public class ListFuncionario extends javax.swing.JInternalFrame {
      */
     public ListFuncionario() {
         initComponents();
-       // carregarTabela();
+       carregarTabela();
     }
     
       public void carregarTabela() {
@@ -39,31 +42,15 @@ public class ListFuncionario extends javax.swing.JInternalFrame {
         for (Funcionario funcionario : lista) {
             
 
-            
-            String casado = "Não";
-            if (funcionario.isCasado()) {
-                casado = "Sim";
-            }
-            String filhos = "Não";
-            if (funcionario.isTemfilhos()) {
-                filhos = "Sim";
-            }
-            String sexo = "";
-            if (funcionario.getSexo().equals("f")) {
-                sexo = "Feminino";
-            }
-            if (funcionario.getSexo().equals("m")) {
-                sexo = "Masculino";
-            }
 
             Object[] dados = {
                 funcionario.getCodigo(),
                 funcionario.getNome(),
-                funcionario.getSetor(),
+                funcionario.getSetor()};
                 
-            model.addRow(dados);
+                model.addRow(dados);
         }
-       // tableClientes.setModel(model);
+            tableFunc.setModel(model);
 
     }
     
@@ -73,11 +60,17 @@ public class ListFuncionario extends javax.swing.JInternalFrame {
     private void initComponents() {
 
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        tableFunc = new javax.swing.JTable();
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        setBackground(new java.awt.Color(153, 153, 255));
+        setClosable(true);
+        setIconifiable(true);
+        setMaximizable(true);
+        setResizable(true);
+
+        tableFunc.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null},
                 {null, null, null},
@@ -95,13 +88,23 @@ public class ListFuncionario extends javax.swing.JInternalFrame {
                 return types [columnIndex];
             }
         });
-        jScrollPane1.setViewportView(jTable1);
+        jScrollPane1.setViewportView(tableFunc);
 
         jButton1.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jButton1.setText("Editar");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
         jButton2.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jButton2.setText("Excluir");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -133,11 +136,42 @@ public class ListFuncionario extends javax.swing.JInternalFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        int linha = tableFunc.getSelectedRow();
+        if(linha < 0){
+            JOptionPane.showMessageDialog(this,"Um cliente deve ser selecionado!");
+        }else{
+            int codigo = (int) tableFunc.getValueAt(linha,0);
+            Funcionario funcionario = FuncionarioDAO.getFuncionarioByCodigo(codigo);
+            
+            int resposta = JOptionPane.showConfirmDialog
+              (this,
+                      "Confirma a exclusão do funcionario  "+funcionario.getNome()+
+                              "?", "Excluir Funcionario",
+                              JOptionPane.YES_NO_OPTION);
+            if(resposta == JOptionPane.YES_OPTION){       
+            FuncionarioDAO.excluir(funcionario);
+            carregarTabela();
+        }
+        }
+    }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+       int linha = tableFunc.getSelectedRow();
+        if(linha < 0){
+            JOptionPane.showMessageDialog(this, "Um cliente deve ser selecionado!");
+        }else{
+        int codigo = (int) tableFunc.getValueAt(linha, 0); 
+        FrmFuncionario tela = new FrmFuncionario();
+        jdpTelaInicial.add(tela);
+        tela.setVisible(true);
+    }//GEN-LAST:event_jButton1ActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
+    private javax.swing.JTable tableFunc;
     // End of variables declaration//GEN-END:variables
 }

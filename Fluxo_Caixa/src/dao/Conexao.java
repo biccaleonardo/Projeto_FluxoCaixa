@@ -13,10 +13,10 @@ import javax.swing.JOptionPane;
 
 
 public class Conexao {
-    private static final String BANCO = "n172_181710077_loja";
+    private static final String BANCO = "n172_Caixa";
     private static final String LOCAL = "senacinfo-db";
     private static final String URL = "jdbc:mysql://"+ LOCAL + ":3306/" + BANCO + "?zeroDateTimeBehavior=convertToNull";
-    private static final String USUARIO = "n172_181710077";
+    private static final String USUARIO = "n172_181301765";
     private static final String SENHA = "senacrs";
     private static final String DRIVER = "com.mysql.jdbc.Driver";
     
