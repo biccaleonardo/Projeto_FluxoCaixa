@@ -331,6 +331,11 @@ public class TelaPrincipal extends javax.swing.JFrame {
         jMenu4.add(btnCadastrarSetor);
 
         btnListSetor.setText("Listar");
+        btnListSetor.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnListSetorActionPerformed(evt);
+            }
+        });
         jMenu4.add(btnListSetor);
 
         jMenuBar1.add(jMenu4);
@@ -404,6 +409,14 @@ public class TelaPrincipal extends javax.swing.JFrame {
         jdpPainel.add(tela);
         tela.setVisible(true);
     }//GEN-LAST:event_btnCadastrarFuncActionPerformed
+
+    private void btnListSetorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnListSetorActionPerformed
+        // TODO add your handling code here:
+        
+         ListSetor tela = new ListSetor();
+     jdpPainel.add(tela);
+     tela.setVisible(true);
+    }//GEN-LAST:event_btnListSetorActionPerformed
 
     /**
      * @param args the command line arguments
