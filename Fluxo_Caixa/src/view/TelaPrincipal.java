@@ -79,7 +79,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jdpPainel.setBackground(new java.awt.Color(204, 204, 204));
+        jdpPainel.setBackground(new java.awt.Color(153, 255, 153));
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
         jLabel1.setText("Entradas:");
@@ -331,6 +331,11 @@ public class TelaPrincipal extends javax.swing.JFrame {
         jMenu4.add(btnCadastrarSetor);
 
         btnListSetor.setText("Listar");
+        btnListSetor.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnListSetorActionPerformed(evt);
+            }
+        });
         jMenu4.add(btnListSetor);
 
         jMenuBar1.add(jMenu4);
@@ -384,7 +389,12 @@ public class TelaPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_jMenuItem2ActionPerformed
 
     private void btnCadastrarSetorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCadastrarSetorActionPerformed
-        // TODO add your handling code here:
+     FrmSetor tela = new FrmSetor();
+     jdpPainel.add(tela);
+     tela.setVisible(true);
+        
+        
+        
     }//GEN-LAST:event_btnCadastrarSetorActionPerformed
 
     private void btnListFuncActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnListFuncActionPerformed
@@ -399,6 +409,14 @@ public class TelaPrincipal extends javax.swing.JFrame {
         jdpPainel.add(tela);
         tela.setVisible(true);
     }//GEN-LAST:event_btnCadastrarFuncActionPerformed
+
+    private void btnListSetorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnListSetorActionPerformed
+        // TODO add your handling code here:
+        
+         ListSetor tela = new ListSetor();
+     jdpPainel.add(tela);
+     tela.setVisible(true);
+    }//GEN-LAST:event_btnListSetorActionPerformed
 
     /**
      * @param args the command line arguments
