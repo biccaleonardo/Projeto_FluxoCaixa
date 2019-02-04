@@ -411,11 +411,9 @@ public class TelaPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_btnCadastrarFuncActionPerformed
 
     private void btnListSetorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnListSetorActionPerformed
-        // TODO add your handling code here:
-        
-         ListSetor tela = new ListSetor();
-     jdpPainel.add(tela);
-     tela.setVisible(true);
+        ListSetor tela = new ListSetor(jdpPainel); 
+        jdpPainel.add(tela);
+        tela.setVisible(true);
     }//GEN-LAST:event_btnListSetorActionPerformed
 
     /**

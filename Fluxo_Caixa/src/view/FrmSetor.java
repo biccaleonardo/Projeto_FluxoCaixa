@@ -161,7 +161,7 @@ public class FrmSetor extends javax.swing.JInternalFrame {
                 setor = new Setor();
             }
             
-            Setor.setNome(nome);
+            setor.setNome(nome);
         
             
             if( novo ){
@@ -170,7 +170,7 @@ public class FrmSetor extends javax.swing.JInternalFrame {
             }else{
                 SetorDAO.editar( setor );
                 
-                telaListSetor.carregarTabela();
+                telaListSetor.CarregarTabela();
                 this.dispose();
             }
             //limpar o formulário

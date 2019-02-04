@@ -8,14 +8,16 @@ public class Setor {
 private int codigo;
 private String nome;
 private Funcionario lider;
+private String setor;
 
     public Setor() {
     }
 
-    public Setor(int codigo, String nome, Setor setor) {
+    public Setor(int codigo, String nome, String setor, Funcionario lider) {
         this.codigo = codigo;
         this.nome = nome;
         this.lider = lider;
+        this.setor = setor;
     }
 
     public int getCodigo() {

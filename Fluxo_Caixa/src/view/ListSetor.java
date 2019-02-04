@@ -5,8 +5,12 @@
  */
 package view;
 
+import dao.SetorDAO;
+import java.util.List;
 import javax.swing.JDesktopPane;
 import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
+import model.Setor;
 
 /**
  *
@@ -16,12 +20,39 @@ public class ListSetor extends javax.swing.JInternalFrame {
     
     public JDesktopPane jdpTelaInicial;
 
-    /**
-     * Creates new form ListSetor
-     */
-    public ListSetor() {
+    
+    public ListSetor(JDesktopPane jdpPainel) {
         initComponents();
+        CarregarTabela();
+        this.jdpTelaInicial = jdpPainel;
     }
+
+
+
+   
+    public void CarregarTabela(){
+       
+        List<Setor> lista = SetorDAO.getSetor();
+        DefaultTableModel model = new DefaultTableModel();
+        String[] colunas = {"Código", "Nome"};
+        model.setColumnIdentifiers(colunas);
+        
+        for (Setor setor : lista){
+            Object [] linha = {
+             setor.getCodigo(),
+             setor.getNome()};
+             
+            
+            model.addRow(linha);
+            
+        }
+        tableSetor.setModel(model);
+      
+        
+            
+        
+    }
+
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -37,7 +68,12 @@ public class ListSetor extends javax.swing.JInternalFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         tableSetor = new javax.swing.JTable();
         btnEditar = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
+        btnExcluir = new javax.swing.JButton();
+
+        setClosable(true);
+        setIconifiable(true);
+        setMaximizable(true);
+        setResizable(true);
 
         jLabel1.setFont(new java.awt.Font("Calibri", 0, 24)); // NOI18N
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -65,8 +101,8 @@ public class ListSetor extends javax.swing.JInternalFrame {
             }
         });
 
-        jButton2.setFont(new java.awt.Font("Calibri", 0, 18)); // NOI18N
-        jButton2.setText("Excluir");
+        btnExcluir.setFont(new java.awt.Font("Calibri", 0, 18)); // NOI18N
+        btnExcluir.setText("Excluir");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -82,7 +118,7 @@ public class ListSetor extends javax.swing.JInternalFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 105, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(btnEditar, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(btnExcluir, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(52, 52, 52))
         );
         jPanel1Layout.setVerticalGroup(
@@ -98,7 +134,7 @@ public class ListSetor extends javax.swing.JInternalFrame {
                         .addGap(101, 101, 101)
                         .addComponent(btnEditar, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(91, 91, 91)
-                        .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(btnExcluir, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(0, 0, Short.MAX_VALUE))))
         );
 
@@ -125,7 +161,7 @@ public class ListSetor extends javax.swing.JInternalFrame {
             JOptionPane.showMessageDialog(this, 
                     "Você deve selecionar um setor!");
         }else{
-            int codigo = (int) tableSetor.getValueAt(linha, 0);
+            int codigo = (int)tableSetor.getValueAt(linha,0);
             FrmSetor tela = new FrmSetor(codigo, this);
             jdpTelaInicial.add(tela);
             tela.setVisible(true);
@@ -135,7 +171,7 @@ public class ListSetor extends javax.swing.JInternalFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnEditar;
-    private javax.swing.JButton jButton2;
+    private javax.swing.JButton btnExcluir;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
