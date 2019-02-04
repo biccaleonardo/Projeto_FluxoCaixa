@@ -5,6 +5,7 @@
  */
 package view;
 
+import dao.SetorDAO;
 import javax.swing.JOptionPane;
 import model.Setor;
 
@@ -23,6 +24,11 @@ public class FrmSetor extends javax.swing.JInternalFrame {
      */
     public FrmSetor() {
         initComponents();
+    }
+    public FrmSetor(int codigo, ListSetor telaListSetor) {
+        initComponents();
+        
+        this.telaListSetor = telaListSetor;
     }
 
     /**
@@ -155,7 +161,8 @@ public class FrmSetor extends javax.swing.JInternalFrame {
                 setor = new Setor();
             }
             
-            Setor.setNome( nome );
+            Setor.setNome(nome);
+        
             
             if( novo ){
                 SetorDAO.inserir(setor);
@@ -166,7 +173,7 @@ public class FrmSetor extends javax.swing.JInternalFrame {
                 telaListSetor.carregarTabela();
                 this.dispose();
             }
-            // limpar o formulário
+            //limpar o formulário
             txtNome.setText("");
             
         }

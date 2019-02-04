@@ -1,9 +1,10 @@
 
 package dao;
 
-import com.sun.xml.internal.bind.v2.schemagen.xmlschema.List;
+
 import java.sql.ResultSet;
 import java.util.ArrayList;
+import java.util.List;
 import javax.swing.JOptionPane;
 import model.Setor;
 
@@ -35,14 +36,29 @@ public class SetorDAO {
     
     
     public static void inserir(Setor setor){
-        String sql = "INSERT INTO setor ( nome, codigo ) "
-                + " VALUES ( '" + setor.getNome() + "' , "
-                        + "   " + setor.getCodigo() +" ) ";
+        String sql = "INSERT INTO setor ( nome ) "
+                + " VALUES ( '" + setor.getNome() + "'  "
+                        + " ) ";
         boolean retorno = Conexao.executar( sql );
         if( !retorno ){
             JOptionPane.showMessageDialog(null, "Erro ao inserir setor");
         }
     
     
+    }
+    public static void editar(Setor setor){
+        String sql = "UPDATE setor "
+                + " SET  nome =  '" + setor.getNome() + "' "
+                        + "  WHERE codigo= " + setor.getCodigo() ;
+        boolean retorno = Conexao.executar( sql );
+        if( !retorno ){
+            JOptionPane.showMessageDialog(null, "Erro ao inserir setor");
+        }
+    
+    
+    }
+    
 }
+    
+
 

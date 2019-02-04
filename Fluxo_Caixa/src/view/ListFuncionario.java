@@ -165,6 +165,7 @@ public class ListFuncionario extends javax.swing.JInternalFrame {
         FrmFuncionario tela = new FrmFuncionario();
         jdpTelaInicial.add(tela);
         tela.setVisible(true);
+        }
     }//GEN-LAST:event_jButton1ActionPerformed
 
 
