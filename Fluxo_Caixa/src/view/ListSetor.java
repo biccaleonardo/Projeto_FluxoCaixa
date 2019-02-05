@@ -17,42 +17,33 @@ import model.Setor;
  * @author 181301765
  */
 public class ListSetor extends javax.swing.JInternalFrame {
-    
+
     public JDesktopPane jdpTelaInicial;
 
-    
     public ListSetor(JDesktopPane jdpPainel) {
         initComponents();
         CarregarTabela();
         this.jdpTelaInicial = jdpPainel;
     }
 
+    public void CarregarTabela() {
 
-
-   
-    public void CarregarTabela(){
-       
         List<Setor> lista = SetorDAO.getSetor();
         DefaultTableModel model = new DefaultTableModel();
         String[] colunas = {"Código", "Nome"};
         model.setColumnIdentifiers(colunas);
-        
-        for (Setor setor : lista){
-            Object [] linha = {
-             setor.getCodigo(),
-             setor.getNome()};
-             
-            
+
+        for (Setor setor : lista) {
+            Object[] linha = {
+                setor.getCodigo(),
+                setor.getNome()};
+
             model.addRow(linha);
-            
+
         }
         tableSetor.setModel(model);
-      
-        
-            
-        
-    }
 
+    }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -160,38 +151,37 @@ public class ListSetor extends javax.swing.JInternalFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditarActionPerformed
-             
-               int linha = tableSetor.getSelectedRow();
-        if( linha < 0 ){
-            JOptionPane.showMessageDialog(this, 
+        int linha = tableSetor.getSelectedRow();
+        if (linha < 0) {
+            JOptionPane.showMessageDialog(this,
                     "Você deve selecionar um setor!");
-        }else{
-            int codigo = (int)tableSetor.getValueAt(linha,0);
+        } else {
+            int codigo = (int) tableSetor.getValueAt(linha, 0);
             FrmSetor tela = new FrmSetor(codigo, this);
             jdpTelaInicial.add(tela);
             tela.setVisible(true);
-            
-            
-            
+
         }
     }//GEN-LAST:event_btnEditarActionPerformed
 
     private void btnExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExcluirActionPerformed
         int linha = tableSetor.getSelectedRow();
-        if (linha < 0){
-            JOptionPane.showMessageDialog(this, "Você deve selecionar uma cidade!");
-        }else{
+        if (linha < 0) {
+            JOptionPane.showMessageDialog(this, "Você deve selecionar um Setor !");
+        } else {
             int codigo = (int) tableSetor.getValueAt(linha, 0);
             String nome = (String) tableSetor.getValueAt(linha, 1);
-            
-            int resposta = JOptionPane.showConfirmDialog(this, "Confirma a exclusão da Cidade " + nome, "Excluir Cidade ", JOptionPane.YES_NO_OPTION );
-            
-            if(resposta == JOptionPane.YES_OPTION){
-                Setor setor = new Setor(); 
-                setor.setCodigo(codigo); 
-                SetorDAO.excluir(setor); 
+
+            int resposta = JOptionPane.showConfirmDialog(this, "Confirma a exclusão do Setor " + nome, "Excluir Setor ", JOptionPane.YES_NO_OPTION);
+
+            if (resposta == JOptionPane.YES_OPTION) {
+                Setor setor = new Setor();
+                setor.setCodigo(codigo);
+                SetorDAO.excluir(setor);
                 CarregarTabela();
-                
+            }
+
+        }
     }//GEN-LAST:event_btnExcluirActionPerformed
 
 

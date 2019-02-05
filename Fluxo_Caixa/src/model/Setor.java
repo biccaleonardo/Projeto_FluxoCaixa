@@ -10,6 +10,12 @@ private String nome;
 private Funcionario lider;
 private String setor;
 
+   
+
+    public String toString() {
+        return nome;
+    }
+
     public Setor() {
     }
 

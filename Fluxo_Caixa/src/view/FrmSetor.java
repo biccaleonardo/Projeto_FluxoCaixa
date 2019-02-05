@@ -160,7 +160,7 @@ public class FrmSetor extends javax.swing.JInternalFrame {
         
         if( nome.isEmpty()){
             JOptionPane.showMessageDialog(null, 
-                    "Nome do setor é obrigatórios!" );
+                    "Nome do setor é obrigatório!" );
         }else{
             boolean novo = false;
             if( setor == null ){

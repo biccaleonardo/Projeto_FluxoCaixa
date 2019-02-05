@@ -6,8 +6,12 @@
 package view;
 
 import dao.FuncionarioDAO;
+import dao.SetorDAO;
 import java.util.List;
+import javax.swing.DefaultComboBoxModel;
+import javax.swing.JOptionPane;
 import model.Funcionario;
+import model.Setor;
 
 /**
  *
@@ -15,29 +19,60 @@ import model.Funcionario;
  */
 public class FrmFuncionario extends javax.swing.JInternalFrame {
 
-    
     private Funcionario funcionario;
-     private ListFuncionario telaListFuncionario;
-  
+    private ListFuncionario telaListFuncionario;
+
     public FrmFuncionario() {
         initComponents();
         funcionario = null;
+        lblCodigo.setVisible(false);
+        carregarSetor();
+        carregarFormulario();
     }
 
-     public FrmFuncionario(int codigo, ListFuncionario telaListFuncionario) {
+    public FrmFuncionario(int codigo, ListFuncionario telaListFuncionario) {
         this.telaListFuncionario = telaListFuncionario;
         initComponents();
         lblCodigo.setVisible(true);
         carregarFormulario();
-        
+
     }
-     private void carregarFormulario(){
+
+    private void carregarFormulario() {
         lblCodigo.setVisible(true);
-        txtNome.setText(funcionario.getNome());
-        txtSetor.setText(funcionario.getNome());
-        
-       
+        txtNomeFunc.setText(funcionario.getNome());
+
+        List<Setor> lista = SetorDAO.getSetor();
+        for (int i = 0; i < lista.size(); i++) {
+            if (lista.get(i).getCodigo() == funcionario.getSetor().getCodigo()) {
+                int posicao = i + 1;
+                cmbSetor.setSelectedIndex(posicao);
+                break;
+            }
+        }
     }
+
+    private void carregarSetor() {
+
+        DefaultComboBoxModel model = new DefaultComboBoxModel();
+
+        Setor fake = new Setor();
+        fake.setCodigo(0);
+        fake.setNome("Selecione...");
+
+        cmbSetor.setEnabled(false);
+
+        List<Setor> lista = SetorDAO.getSetor();
+        
+        model.addElement(fake);
+        for (Setor setor : lista) {
+            model.addElement(setor);
+        }
+
+        cmbSetor.setModel(model);
+
+    }
+
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -49,10 +84,10 @@ public class FrmFuncionario extends javax.swing.JInternalFrame {
         lblCodigo = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
-        txtNome = new javax.swing.JTextField();
-        txtSetor = new javax.swing.JTextField();
+        txtNomeFunc = new javax.swing.JTextField();
         btnSalvar = new javax.swing.JButton();
         btnLimpar = new javax.swing.JButton();
+        cmbSetor = new javax.swing.JComboBox<>();
 
         setClosable(true);
         setIconifiable(true);
@@ -78,18 +113,30 @@ public class FrmFuncionario extends javax.swing.JInternalFrame {
         jLabel6.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel6.setText("Setor:");
 
-        txtNome.addActionListener(new java.awt.event.ActionListener() {
+        txtNomeFunc.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtNomeActionPerformed(evt);
+                txtNomeFuncActionPerformed(evt);
             }
         });
 
         btnSalvar.setText("Salvar");
+        btnSalvar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSalvarActionPerformed(evt);
+            }
+        });
 
         btnLimpar.setText("Limpar");
         btnLimpar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnLimparActionPerformed(evt);
+            }
+        });
+
+        cmbSetor.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        cmbSetor.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cmbSetorActionPerformed(evt);
             }
         });
 
@@ -115,7 +162,7 @@ public class FrmFuncionario extends javax.swing.JInternalFrame {
                         .addContainerGap()
                         .addComponent(jLabel5)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(txtNome))
+                        .addComponent(txtNomeFunc))
                     .addGroup(layout.createSequentialGroup()
                         .addContainerGap()
                         .addComponent(jLabel6)
@@ -125,7 +172,7 @@ public class FrmFuncionario extends javax.swing.JInternalFrame {
                                 .addComponent(btnSalvar, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addComponent(btnLimpar, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(txtSetor))))
+                            .addComponent(cmbSetor, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
                 .addContainerGap(106, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -142,33 +189,66 @@ public class FrmFuncionario extends javax.swing.JInternalFrame {
                 .addGap(26, 26, 26)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel5)
-                    .addComponent(txtNome, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtNomeFunc, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel6)
-                    .addComponent(txtSetor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(cmbSetor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(48, 48, 48)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnSalvar, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnLimpar, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(47, Short.MAX_VALUE))
+                .addContainerGap(51, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void txtNomeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtNomeActionPerformed
+    private void txtNomeFuncActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtNomeFuncActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_txtNomeActionPerformed
+    }//GEN-LAST:event_txtNomeFuncActionPerformed
 
     private void btnLimparActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLimparActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_btnLimparActionPerformed
 
+    private void cmbSetorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbSetorActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_cmbSetorActionPerformed
+
+    private void btnSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalvarActionPerformed
+        String nome = txtNomeFunc.getText();
+
+        if (nome.isEmpty() || cmbSetor.getSelectedIndex() == 0) {
+            JOptionPane.showMessageDialog(null, "Nome e setor são obrigatórios! ");
+        } else {
+            boolean nova = false;
+            if (funcionario == null) {
+                nova = true;
+                funcionario = new Funcionario();
+            }
+
+            funcionario.setNome(nome);
+            funcionario.setSetor((Setor) cmbSetor.getSelectedItem());
+            if (nova) {
+                FuncionarioDAO.inserir(funcionario);
+            } else {
+                FuncionarioDAO.editar(funcionario);
+                telaListFuncionario.carregarTabela();
+                this.dispose();
+            }
+
+            txtNomeFunc.setText("");
+            cmbSetor.setSelectedIndex(0);
+        }
+
+    }//GEN-LAST:event_btnSalvarActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnLimpar;
     private javax.swing.JButton btnSalvar;
+    private javax.swing.JComboBox<String> cmbSetor;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -176,7 +256,6 @@ public class FrmFuncionario extends javax.swing.JInternalFrame {
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel lblCodigo;
-    private javax.swing.JTextField txtNome;
-    private javax.swing.JTextField txtSetor;
+    private javax.swing.JTextField txtNomeFunc;
     // End of variables declaration//GEN-END:variables
 }
