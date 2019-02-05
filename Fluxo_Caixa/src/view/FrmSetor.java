@@ -24,11 +24,18 @@ public class FrmSetor extends javax.swing.JInternalFrame {
      */
     public FrmSetor() {
         initComponents();
+        lblCodigo.setVisible(false);
     }
     public FrmSetor(int codigo, ListSetor telaListSetor) {
-        initComponents();
         
         this.telaListSetor = telaListSetor;
+        initComponents();
+        setor = SetorDAO.getSetorByCodigo(codigo);
+        carregarFormulario();
+    }
+    private void carregarFormulario(){
+        lblCodigo.setText(String.valueOf(setor.getCodigo()));
+        txtNome.setText(setor.getNome());
     }
 
     /**

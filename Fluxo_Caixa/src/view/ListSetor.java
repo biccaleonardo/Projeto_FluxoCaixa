@@ -103,6 +103,11 @@ public class ListSetor extends javax.swing.JInternalFrame {
 
         btnExcluir.setFont(new java.awt.Font("Calibri", 0, 18)); // NOI18N
         btnExcluir.setText("Excluir");
+        btnExcluir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnExcluirActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -165,8 +170,29 @@ public class ListSetor extends javax.swing.JInternalFrame {
             FrmSetor tela = new FrmSetor(codigo, this);
             jdpTelaInicial.add(tela);
             tela.setVisible(true);
+            
+            
+            
         }
     }//GEN-LAST:event_btnEditarActionPerformed
+
+    private void btnExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExcluirActionPerformed
+        int linha = tableSetor.getSelectedRow();
+        if (linha < 0){
+            JOptionPane.showMessageDialog(this, "Você deve selecionar uma cidade!");
+        }else{
+            int codigo = (int) tableSetor.getValueAt(linha, 0);
+            String nome = (String) tableSetor.getValueAt(linha, 1);
+            
+            int resposta = JOptionPane.showConfirmDialog(this, "Confirma a exclusão da Cidade " + nome, "Excluir Cidade ", JOptionPane.YES_NO_OPTION );
+            
+            if(resposta == JOptionPane.YES_OPTION){
+                Setor setor = new Setor(); 
+                setor.setCodigo(codigo); 
+                SetorDAO.excluir(setor); 
+                CarregarTabela();
+                
+    }//GEN-LAST:event_btnExcluirActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

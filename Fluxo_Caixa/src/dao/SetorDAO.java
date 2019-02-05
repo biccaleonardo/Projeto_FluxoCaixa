@@ -32,6 +32,42 @@ public class SetorDAO {
         }
        return lista; 
     }
+    public static Setor getSetorByCodigo(int codigo){
+            String sql = "SELECT codigo, nome "
+                    + " FROM setor "
+                    + " WHERE codigo = " + codigo
+                    + " ORDER BY nome "; 
+            
+            
+            ResultSet rs = Conexao.consultar(sql);
+            
+            if(rs != null){
+                
+                try {
+                     
+                    rs.next();
+                                              
+                        Setor setor  = new Setor();
+                        setor.setCodigo( rs.getInt( 1 )); 
+                        setor.setNome( rs.getString( 2 )); 
+                        
+                        
+                        
+                        return setor;
+                        
+                    
+                } catch (Exception e) {
+                }
+             
+                
+            }
+            
+            
+            return null;
+            
+            
+            
+        }
     
     
     
@@ -49,7 +85,7 @@ public class SetorDAO {
     public static void editar(Setor setor){
         String sql = "UPDATE setor "
                 + " SET  nome =  '" + setor.getNome() + "' "
-                        + "  WHERE codigo= " + setor.getCodigo() ;
+                        + "  WHERE codigo = " + setor.getCodigo() ;
         boolean retorno = Conexao.executar( sql );
         if( !retorno ){
             JOptionPane.showMessageDialog(null, "Erro ao inserir setor");
@@ -57,7 +93,16 @@ public class SetorDAO {
     
     
     }
+     public static void excluir(Setor setor){
+        String sql = "DELETE FROM setor "
+                + "WHERE codigo = " + setor.getCodigo();
+                
+        boolean retorno = Conexao.executar(sql);
+        if( !retorno){
+            JOptionPane.showMessageDialog(null, "Erro ao excluir setor");
+        }
     
+}
 }
     
 
