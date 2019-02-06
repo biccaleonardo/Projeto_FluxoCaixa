@@ -10,6 +10,7 @@ import java.util.Calendar;
 import java.util.List;
 import javax.swing.JDesktopPane;
 import javax.swing.JOptionPane;
+import javax.swing.JPanel;
 import javax.swing.table.DefaultTableModel;
 import model.Funcionario;
 
@@ -31,6 +32,10 @@ public class ListFuncionario extends javax.swing.JInternalFrame {
     public ListFuncionario() {
         initComponents();
        carregarTabela();
+    }
+
+    ListFuncionario(JPanel jdpPainel) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     
       public void carregarTabela() {

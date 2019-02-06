@@ -4,17 +4,17 @@ package model;
 import java.util.Calendar;
 
 
-public class Retirada {
+public class Caixa {
   
     private int codigo;
     private double valor;
     private Funcionario funcionario;
     private Calendar data;
 
-    public Retirada() {
+    public Caixa() {
     }
 
-    public Retirada(int codigo, double valor, Funcionario funcionario, Calendar data) {
+    public Caixa(int codigo, double valor, Funcionario funcionario, Calendar data) {
         this.codigo = codigo;
         this.valor = valor;
         this.funcionario = funcionario;

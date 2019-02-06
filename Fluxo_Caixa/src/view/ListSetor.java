@@ -9,6 +9,7 @@ import dao.SetorDAO;
 import java.util.List;
 import javax.swing.JDesktopPane;
 import javax.swing.JOptionPane;
+import javax.swing.JPanel;
 import javax.swing.table.DefaultTableModel;
 import model.Setor;
 
@@ -24,6 +25,10 @@ public class ListSetor extends javax.swing.JInternalFrame {
         initComponents();
         CarregarTabela();
         this.jdpTelaInicial = jdpPainel;
+    }
+
+    ListSetor(JPanel jdpPainel) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     public void CarregarTabela() {

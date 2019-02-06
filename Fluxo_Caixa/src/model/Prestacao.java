@@ -10,14 +10,14 @@ public class Prestacao {
     
     private int codigo;
     private double valor;
-    private Retirada retirada;
+    private Caixa retirada;
     private String descricao;
     private Calendar data;      
 
     public Prestacao() {
     }
 
-    public Prestacao(int codigo, double valor, Retirada retirada, String descricao, Calendar data) {
+    public Prestacao(int codigo, double valor, Caixa retirada, String descricao, Calendar data) {
         this.codigo = codigo;
         this.valor = valor;
         this.retirada = retirada;
@@ -41,11 +41,11 @@ public class Prestacao {
         this.valor = valor;
     }
 
-    public Retirada getRetirada() {
+    public Caixa getRetirada() {
         return retirada;
     }
 
-    public void setRetirada(Retirada retirada) {
+    public void setRetirada(Caixa retirada) {
         this.retirada = retirada;
     }
 
