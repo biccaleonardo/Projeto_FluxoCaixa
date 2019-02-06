@@ -5,11 +5,21 @@
  */
 package view;
 
+import dao.SaidaDAO;
+
+import javax.swing.JOptionPane;
+import model.Saida;
+
+
 /**
  *
  * @author 181301765
+ * 
  */
+
+
 public class Saidas extends javax.swing.JInternalFrame {
+    private Saida saida;
 
     /**
      * Creates new form Saidas
@@ -65,8 +75,18 @@ public class Saidas extends javax.swing.JInternalFrame {
         jLabel3.setText("Valor:");
 
         btnSalvar.setText("Salvar");
+        btnSalvar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSalvarActionPerformed(evt);
+            }
+        });
 
         btnLimpar.setText("Limpar");
+        btnLimpar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnLimparActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -126,6 +146,33 @@ public class Saidas extends javax.swing.JInternalFrame {
     private void txtDescrActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtDescrActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txtDescrActionPerformed
+
+    private void btnSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalvarActionPerformed
+        String descricao = txtDescr.getText();
+        
+        
+        if( descricao.isEmpty()){
+            JOptionPane.showMessageDialog(null, 
+                    "A descrição é obrigatória!" );
+        }else{
+            boolean novo = false;
+            if( descricao == null ){
+                novo = true;
+                saida = new Saida(); 
+                SaidaDAO.inserir(saida);
+                this.dispose();
+            }
+            
+           
+         
+            
+            
+        }
+    }//GEN-LAST:event_btnSalvarActionPerformed
+
+    private void btnLimparActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLimparActionPerformed
+        
+    }//GEN-LAST:event_btnLimparActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

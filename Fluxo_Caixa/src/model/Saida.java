@@ -8,17 +8,15 @@ public class Saida {
     
     private int codigo;
     private  double valor;
-    private Funcionario funcionario;
     private String descricao;
     private Calendar data;
 
     public Saida() {
     }
 
-    public Saida(int codigo, double valor, Funcionario funcionario, String descricao, Calendar data) {
+    public Saida(int codigo, double valor, String descricao, Calendar data) {
         this.codigo = codigo;
         this.valor = valor;
-        this.funcionario = funcionario;
         this.descricao = descricao;
         this.data = data;
     }
@@ -37,14 +35,6 @@ public class Saida {
 
     public void setValor(double valor) {
         this.valor = valor;
-    }
-
-    public Funcionario getFuncionario() {
-        return funcionario;
-    }
-
-    public void setFuncionario(Funcionario funcionario) {
-        this.funcionario = funcionario;
     }
 
     public String getDescricao() {
