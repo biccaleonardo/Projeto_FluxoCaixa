@@ -95,11 +95,12 @@ public class SaidaDAO {
     }
 
     public static void editar(Saida saida) {
-        String sql = "INSERT  INTO saida "
-                + "(valor, descricao, data) VALUES ( "
-                + " '" + saida.getValor()+ "', "
-                + " '" + saida.getDescricao()+"'  " 
+        String sql = "UPDATE saida SET "
+                + "(codigo, data, descricao, valor) VALUES ( "
+                + " " + saida.getCodigo()+ ", "
                 + " '" + saida.getData()+"'  " 
+                + " '" + saida.getDescricao()+"'  " 
+                + " " + saida.getValor()+"  " 
                 + " )";
         Conexao.executar(sql);
     }

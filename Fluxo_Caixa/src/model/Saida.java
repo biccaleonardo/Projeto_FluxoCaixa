@@ -52,6 +52,14 @@ public class Saida {
     public void setData(Calendar data) {
         this.data = data;
     }
+
+    public void setValor(String valor) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    public void setData(String data) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
     
     
 }
