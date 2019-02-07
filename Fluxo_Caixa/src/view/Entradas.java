@@ -6,7 +6,9 @@
 package view;
 
 import dao.EntradaDAO;
+import java.util.Calendar;
 import javax.swing.JOptionPane;
+import model.Entrada;
 
 /**
  *
@@ -14,7 +16,7 @@ import javax.swing.JOptionPane;
  */
 public class Entradas extends javax.swing.JInternalFrame {
 
-    private Entradas entradas;
+    private Entrada entrada;
    
     public Entradas() {
         initComponents();
@@ -53,7 +55,6 @@ public class Entradas extends javax.swing.JInternalFrame {
         jLabel1.setText("Entradas");
 
         txtValor.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("#0.00"))));
-        txtValor.setText("0");
 
         jLabel2.setText("Descrição:");
 
@@ -67,6 +68,11 @@ public class Entradas extends javax.swing.JInternalFrame {
         });
 
         btnLimpar.setText("Limpar");
+        btnLimpar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnLimparActionPerformed(evt);
+            }
+        });
 
         try {
             txtData.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("##/##/####")));
@@ -126,13 +132,30 @@ public class Entradas extends javax.swing.JInternalFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnSalvar)
                     .addComponent(btnLimpar))
-                .addContainerGap(118, Short.MAX_VALUE))
+                .addContainerGap(122, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void txtDescrActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtDescrActionPerformed
+   
+    }//GEN-LAST:event_txtDescrActionPerformed
+
+    private void txtDataActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtDataActionPerformed
+
+    }//GEN-LAST:event_txtDataActionPerformed
+                                      
+
+    private void btnLimparActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLimparActionPerformed
+        txtData.setText("");
+        txtDescr.setText("");
+        txtValor.setText("");
+         
+    }//GEN-LAST:event_btnLimparActionPerformed
+
+    private void btnSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalvarActionPerformed
+
    String descricao = txtDescr.getText();
    String valor = txtValor.getText();
    String data = txtData.getText();
@@ -141,31 +164,24 @@ public class Entradas extends javax.swing.JInternalFrame {
        JOptionPane.showMessageDialog(this, "Preencher todos os campos");
    }else{
        
-       boolean nova = false;
-       if ( entradas == null){
-           nova = true;
-           entradas = new Entradas();
-       }
-       entradas.setDescricao(descricao);
-       entradas.setValor(valor);
-       entradas.setData(data);
        
-       if (nova){
-           EntradaDAO
-       }
+       entrada = new Entrada();
+       
+       entrada.setDescricao(descricao);
+       entrada.setValor( Double.valueOf(valor));
+       
+       int dia = Integer.valueOf( data.substring( 0 , 2)  );
+           int mes = Integer.valueOf( data.substring( 3 , 5) ) -1;
+           int ano = Integer.valueOf( data.substring( 6 ) );
+           Calendar dataEntrada = Calendar.getInstance();
+           dataEntrada.set(ano, mes, dia);
+           entrada.setData(dataEntrada);
+       
+           EntradaDAO.inserir(entrada);
+       
        
    }
-   
-   
-   
-    }//GEN-LAST:event_txtDescrActionPerformed
-
-    private void txtDataActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtDataActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtDataActionPerformed
-
-    private void btnSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalvarActionPerformed
-
+        
     }//GEN-LAST:event_btnSalvarActionPerformed
 
 

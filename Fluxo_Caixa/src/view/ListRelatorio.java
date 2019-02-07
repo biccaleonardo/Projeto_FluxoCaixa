@@ -9,12 +9,12 @@ package view;
  *
  * @author 181720103
  */
-public class listRelatorio extends javax.swing.JInternalFrame {
+public class ListRelatorio extends javax.swing.JInternalFrame {
 
     /**
-     * Creates new form listRelatorio
+     * Creates new form ListRelatorio
      */
-    public listRelatorio() {
+    public ListRelatorio() {
         initComponents();
     }
 
