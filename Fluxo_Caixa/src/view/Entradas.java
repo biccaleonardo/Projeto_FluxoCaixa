@@ -168,6 +168,7 @@ public class Entradas extends javax.swing.JInternalFrame {
        entrada = new Entrada();
        
        entrada.setDescricao(descricao);
+       valor = valor.replace(",", ".");
        entrada.setValor( Double.valueOf(valor));
        
        int dia = Integer.valueOf( data.substring( 0 , 2)  );
