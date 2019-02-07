@@ -158,6 +158,7 @@ public class FrmSaidas extends javax.swing.JInternalFrame {
         }else{
             saida = new Saida();
             saida.setDescricao(descricao);
+            valor = valor.replace(",",".");
             saida.setValor(Double.valueOf(valor));
             
             int dia = Integer.valueOf( data.substring( 0 , 2)  );
