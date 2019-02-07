@@ -6,6 +6,7 @@
 package view;
 
 import dao.SaidaDAO;
+import java.util.Calendar;
 
 import javax.swing.JOptionPane;
 import model.Saida;
@@ -151,20 +152,25 @@ public class FrmSaidas extends javax.swing.JInternalFrame {
         String data = txtData.getText();
         
         
-        if( descricao.isEmpty()){
+        if( descricao.isEmpty() || valor.isEmpty() || data.isEmpty()){
             JOptionPane.showMessageDialog(null, 
-                    "A descrição é obrigatória!" );
+                    "É obrigatório preencher todos os campos!" );
         }else{
             saida = new Saida();
             saida.setDescricao(descricao);
-            saida.setData(data);
-            saida.setValor(valor);
+            valor = valor.replace(",",".");
+            saida.setValor(Double.valueOf(valor));
+            
+            int dia = Integer.valueOf( data.substring( 0 , 2)  );
+            int mes = Integer.valueOf( data.substring( 3 , 5) ) -1;
+            int ano = Integer.valueOf( data.substring( 6 ) );
+            Calendar dataSaida = Calendar.getInstance();
+            dataSaida.set(ano, mes, dia);
+            saida.setData(dataSaida);
             
             SaidaDAO.inserir(saida);
             
            
-         
-            
             
         }
     }//GEN-LAST:event_btnSalvarActionPerformed

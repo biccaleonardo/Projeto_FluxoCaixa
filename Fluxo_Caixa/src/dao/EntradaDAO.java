@@ -77,24 +77,10 @@ public class EntradaDAO {
         }
     
      public static void inserir(Entrada entrada) {
-         String data =  + entrada.getData().get(Calendar.YEAR)
+         String data = "" + entrada.getData().get(Calendar.YEAR)
                  + "-"  +(entrada.getData().get(Calendar.MONTH )+ 1)
                  + "-"  + entrada.getData().get(Calendar.DAY_OF_MONTH);
          
-         
-
-        
-<<<<<<< HEAD
-        
-                
-        
-    
-
-
-           
-        
-    
-=======
         String sql = "INSERT  INTO entrada "
                 + "(codigo, data, descricao, valor) VALUES ( "
                 + "  " + entrada.getCodigo()      + ", "
@@ -104,15 +90,19 @@ public class EntradaDAO {
                 + " )";
         Conexao.executar(sql);
     }
->>>>>>> 828f73689d0b8e10d808a1f5cb0eb1c34d2d9944
 
-    public static void editar(Entrada entrada) {
-        String sql = "INSERT  INTO entrada "
-                + "(valor, descricao, data) VALUES ( "
-                + " '" + entrada.getValor()+ "', "
-                + " '" + entrada.getDescricao()+"'  " 
-                + " '" + entrada.getData()+"'  " 
-                + " )";
+
+    public static void editar(Entrada entrada) {String data = "" + entrada.getData().get(Calendar.YEAR)
+                + "-" + (entrada.getData().get(Calendar.MONTH) + 1)
+                + "-" + entrada.getData().get(Calendar.DAY_OF_MONTH);
+
+        String sql = " UPDATE entrada SET"
+                + "( codigo, data, descricao, valor) VALUES ( "
+                + "" + entrada.getCodigo() + " , "
+                + "'" + data + "' , "
+                + "'" + entrada.getDescricao() + "',"
+                + "" + entrada.getValor() + ")";
+
         Conexao.executar(sql);
     }
     
