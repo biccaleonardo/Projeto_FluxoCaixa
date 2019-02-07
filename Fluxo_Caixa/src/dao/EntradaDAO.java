@@ -84,6 +84,17 @@ public class EntradaDAO {
          
 
         
+<<<<<<< HEAD
+        
+                
+        
+    
+
+
+           
+        
+    
+=======
         String sql = "INSERT  INTO entrada "
                 + "(codigo, data, descricao, valor) VALUES ( "
                 + "  " + entrada.getCodigo()      + ", "
@@ -93,6 +104,7 @@ public class EntradaDAO {
                 + " )";
         Conexao.executar(sql);
     }
+>>>>>>> 828f73689d0b8e10d808a1f5cb0eb1c34d2d9944
 
     public static void editar(Entrada entrada) {
         String sql = "INSERT  INTO entrada "

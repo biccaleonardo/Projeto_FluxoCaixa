@@ -116,7 +116,7 @@ public class Caixa extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_btnSairActionPerformed
 
     private void btnSaidaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSaidaActionPerformed
-        Saidas tela = new Saidas();
+        FrmSaidas tela = new FrmSaidas();
         jdpCaixa.add(tela);
         tela.setVisible(true);
     }//GEN-LAST:event_btnSaidaActionPerformed

@@ -18,13 +18,13 @@ import model.Saida;
  */
 
 
-public class Saidas extends javax.swing.JInternalFrame {
+public class FrmSaidas extends javax.swing.JInternalFrame {
     private Saida saida;
 
     /**
      * Creates new form Saidas
      */
-    public Saidas() {
+    public FrmSaidas() {
         initComponents();
     }
 
@@ -60,7 +60,6 @@ public class Saidas extends javax.swing.JInternalFrame {
             ex.printStackTrace();
         }
 
-        txtDescr.setText("A");
         txtDescr.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtDescrActionPerformed(evt);
@@ -68,7 +67,6 @@ public class Saidas extends javax.swing.JInternalFrame {
         });
 
         txtValor.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("#0.00"))));
-        txtValor.setText("0");
 
         jLabel2.setText("Descrição:");
 
@@ -149,19 +147,20 @@ public class Saidas extends javax.swing.JInternalFrame {
 
     private void btnSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalvarActionPerformed
         String descricao = txtDescr.getText();
+        String valor = txtValor.getText();
+        String data = txtData.getText();
         
         
         if( descricao.isEmpty()){
             JOptionPane.showMessageDialog(null, 
                     "A descrição é obrigatória!" );
         }else{
-            boolean novo = false;
-            if( descricao == null ){
-                novo = true;
-                saida = new Saida(); 
-                SaidaDAO.inserir(saida);
-                this.dispose();
-            }
+            saida = new Saida();
+            saida.setDescricao(descricao);
+            saida.setData(data);
+            saida.setValor(valor);
+            
+            SaidaDAO.inserir(saida);
             
            
          
@@ -171,7 +170,9 @@ public class Saidas extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_btnSalvarActionPerformed
 
     private void btnLimparActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLimparActionPerformed
-        
+        txtData.setText("");
+        txtDescr.setText("");
+        txtValor.setText("");
     }//GEN-LAST:event_btnLimparActionPerformed
 
 
