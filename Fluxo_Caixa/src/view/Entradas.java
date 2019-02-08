@@ -7,6 +7,7 @@ package view;
 
 import dao.EntradaDAO;
 import java.util.Calendar;
+import java.util.List;
 import javax.swing.JOptionPane;
 import model.Entrada;
 
@@ -17,11 +18,39 @@ import model.Entrada;
 public class Entradas extends javax.swing.JInternalFrame {
 
     private Entrada entrada;
+    private ListRelatorio telaListRelatorio;
+    
+   
    
     public Entradas() {
         initComponents();
         
     }
+    
+    public Entradas(int codigo, ListRelatorio telaListRelatorio){
+        this.telaListRelatorio = telaListRelatorio;
+        initComponents();
+        entrada = EntradaDAO.getEntradaByCodigo(codigo);
+        carregarFormulario();
+       
+    }
+    private void carregarFormulario(){
+     
+        txtDescr.setText(entrada.getDescricao());
+       txtValor.setText(String.valueOf(entrada.getValor()));
+       
+       Calendar dataSai = entrada.getData();
+            String data = "" +
+                      dataSai.get( Calendar.DAY_OF_MONTH) +
+                "/" +(dataSai.get( Calendar.MONTH )+1) +
+                "/" + dataSai.get( Calendar.YEAR );
+        txtData.setText(data);
+        
+    }
+    
+    
+    
+    
 
     /**
      * This method is called from within the constructor to initialize the form.

@@ -104,5 +104,10 @@ public class SaidaDAO {
                 + " )";
         Conexao.executar(sql);
     }
+      public static void excluir(Saida saida){
+        String sql = "DELETE FROM saida "
+            + " WHERE codigo   =  " + saida.getCodigo() ;
+        Conexao.executar(sql);
+    }
     
 }

@@ -39,7 +39,7 @@ public class EntradaDAO {
         }
        return lista; 
     }
-    public static Entrada getSaidaByCodigo(int codigo){
+    public static Entrada getEntradaByCodigo(int codigo){
             String sql = "SELECT valor, descricao, data "
                     + " FROM entrada "
                     + " WHERE codigo = " + codigo
@@ -103,6 +103,11 @@ public class EntradaDAO {
                 + "'" + entrada.getDescricao() + "',"
                 + "" + entrada.getValor() + ")";
 
+        Conexao.executar(sql);
+    }
+      public static void excluir(Entrada entrada){
+        String sql = "DELETE FROM entrada "
+            + " WHERE codigo   =  " + entrada.getCodigo() ;
         Conexao.executar(sql);
     }
     
